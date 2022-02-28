@@ -37,5 +37,5 @@ Cohort 16.
 ### Author
 ***
 *Holberton School Student*
-Elkin Guerrero Bastidas - [Github](https://github.com/elkinguerrero007) - [Twitter]()
-Juan Sebastian Posada  - [Github](https://github.com/Juansepo13) - [Twiter](https://twitter.com/@JuanSeb35904130)
+# Elkin Guerrero Bastidas - [Github](https://github.com/elkinguerrero007) - [Twitter]()
+# Juan Sebastian Posada  - [Github](https://github.com/Juansepo13) - [Twiter](https://twitter.com/@JuanSeb35904130)
