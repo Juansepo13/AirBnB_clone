@@ -33,16 +33,13 @@ cursus nulla viverra nec.
 
 ### 
 
-
 ```
 /**
  *
-   *
-        *
-	        *
-		           *
-			                 *
-					                  */
+ *
+ *
+ *
+ */
 
 ```
 
@@ -50,7 +47,7 @@ cursus nulla viverra nec.
 
 | File                 | Details                                    |
 |--------------------- | ------------------------------------------ |
-| [](./a) |            |
+| [AUTHORS](./a) | This file lists all individuals having contributed content to the repository |
 | [](./b) |            |
 | [](./c) |            |
 | [](./)  |            |
