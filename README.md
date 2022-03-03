@@ -49,7 +49,7 @@ cursus nulla viverra nec.
 |--------------------- | ------------------------------------------ |
 | [AUTHORS](https://github.com/Juansepo13/AirBnB_clone/blob/master/AUTHORS) | This file lists all individuals having contributed content to the repository |
 | [README.md](https://github.com/Juansepo13/AirBnB_clone/blob/master/README.md) | README file with description for AirBnb project |
-| [https://github.com/Juansepo13/AirBnB_clone/blob/master/console.py](./c) |            |
+| [](./c) |            |
 | [console.py](https://github.com/Juansepo13/AirBnB_clone/blob/master/console.py)  | Interactive console|
 | [](./)  |            |
 
