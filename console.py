@@ -59,13 +59,13 @@ class HBNBCommand(cmd.Cmd):
         """End Of File command to exit the program"""
         quit()
         
- def emptyline(self):
+    def emptyline(self):
         """Do nothing on empty line\n"""
         pass
 
     def do_create(self, args):
         """Creates a new instance of BaseModel \
-saves it (to the JSON file) and prints the id.
+           saves it (to the JSON file) and prints the id.
         """
         args = shlex.split(args)
         if not args:
@@ -170,3 +170,64 @@ saves it (to the JSON file) and prints the id.
                         list_objects is a list with the objects in format
                         [class name] (id) object"""
                     print(list_objects)
+                    
+    def do_update(self, args):
+        """Updates an instance based on the class name and id by adding or
+        updating attribute (save the change into the JSON file)."""
+
+        if args == '':
+            print("** class name missing **")
+            return
+        args_list = args.split()
+        if args_list[0] not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
+        if len(args_list) == 1:
+            print("** instance id missing **")
+            return
+        key = args_list[0] + "." + args_list[1]
+        all_objects = models.storage.all()
+        if key not in all_objects:
+            print("** no instance found **")
+            return
+        if len(args_list) == 2:
+            print("** attribute name missing **")
+            return
+        if len(args_list) == 3:
+            print("** value missing **")
+            return
+        attribute = args_list[2]
+        value = args_list[3]
+        if '"' in value:
+            value = value.strip('"')
+        """args_list[0] is the class name, args_list[1] is the id, args_list[2]
+        is the attribute name, args_list[3] is the value to update"""
+        try:
+            setattr(all_objects[key], attribute, value)
+            models.storage.save()
+        except AttributeError:
+            print("** attribute name missing **")
+            return
+
+    def do_count(self, args):
+        """counts the number of instances of a class"""
+        counter = 0
+        my_objects = models.storage.all()
+        """my_objects is a dictionary with the key and value of the
+             dictionary"""
+        if args in self.classes:
+            for key in my_objects.keys():
+                """for key in my_objects.keys() is a loop that
+                iterates over the keys of the dictionary"""
+                find_class = key.split(".")
+                """find_class is a list of the key split by "." """
+                if find_class[0] == args:
+                    """if find_class[0] == args, then the class name
+                    is the same as the args"""
+                    counter += 1
+                    """counter += 1 is a function that adds 1 to the counter"""
+            print(counter)
+
+
+if __name__ == "__main__":
+    HBNBCommand().cmdloop()
