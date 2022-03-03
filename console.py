@@ -19,12 +19,12 @@ import shlex
 """ 6. Console 0.0.1 """
 
 my_classes = {"BaseModel": BaseModel, "User": User, "State": State,
-                            "City": City, "Amenity": Amenity,
-                            "Place": Place, "Review": Review}
+              "City": City, "Amenity": Amenity,
+              "Place": Place, "Review": Review}
 
 
 class HBNBCommand(cmd.Cmd):
-        """-HBNBCommand(cmd.Cmd) is a class that inherits from cmd.Cmd
+    """-HBNBCommand(cmd.Cmd) is a class that inherits from cmd.Cmd
                     cmd.Cmd is methods to execute a command prompt command
                     line interface for a Python program.
        -prompt is a interpreter-specific string that is displayed to the user
@@ -39,21 +39,22 @@ class HBNBCommand(cmd.Cmd):
        -args_list is a list of arguments passed to the command."""
 
     prompt = '(hbnb) '
-        classes = ["BaseModel",
-                   "User",
-                   "State",
-                   "City",
-                   "Amenity",
-                   "Place",
-                   "Review"]
+    classes = ["BaseModel",
+               "User",
+               "State",
+               "City",
+               "Amenity",
+               "Place",
+               "Review"]
 
     """reload() reloads the JSON file
+
     instances = ["do_show", "do_destroy", "do_all", "do_update"]"""
 
     def do_quit(self, args):
         """Quit command to exit the program.\n"""
         quit()
 
-     def do_EOF(self, args):
-         """End Of File command to exit the program"""
-         quit()
+    def do_EOF(self, args):
+        """End Of File command to exit the program"""
+        quit()
