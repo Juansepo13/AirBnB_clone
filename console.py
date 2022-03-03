@@ -111,63 +111,62 @@ saves it (to the JSON file) and prints the id.
                   models.storage.all()[new_object]))
             """print the object in format [class name] (id) object"""
 
-def do_destroy(self, args):
-    """Deletes an instance based on the class name and id."""
-    args_list = shlex.split(args)
-    """args_list is a list of arguments passed to the command
-        shlex is a lexical analyser for simple shell-like syntax;
-        and shlex.split() splits a string into a list of tokens."""
-    if len(args_list) == 0:
-        print("** class name missing **")
-        return
-    elif args_list[0] in my_classes:
-        if the args_list[0] is in my_classes, then the class exists
-        """if len(args_list) > 1:
-"""
-        if the lenght of args_list is greater than 1,
-        then the id is passed"""
-                                                                                                    key = args_list[0] + "." + args_list[1]
-                                                                                                                    """key = args_list[0] + "." + args_list[1]
+    def do_destroy(self, args):
+        """Deletes an instance based on the class name and id."""
+        args_list = shlex.split(args)
+        """args_list is a list of arguments passed to the command
+                shlex is a lexical analyser for simple shell-like syntax;
+                and shlex.split() splits a string into a list of tokens."""
+        if len(args_list) == 0:
+            print("** class name missing **")
+            return
+        elif args_list[0] in my_classes:
+            """if the args_list[0] is in my_classes, then the class exists"""
+            if len(args_list) > 1:
+                """if the lenght of args_list is greater than 1,
+                then the id is passed"""
+                key = args_list[0] + "." + args_list[1]
+                """key = args_list[0] + "." + args_list[1]
                     key is the key to search in the dictionary"""
-                                                                                                                                    if key in models.storage.all():
-                                                                                                                                                            del models.storage.all()[key]
-                                                                                                                                                                                """del(key) removes the key from the dictionary"""
-                                                                                                                                                                                                    models.storage.save()
-                                                                                                                                                                                                                        """save() saves the changes in the JSON file"""
-                                                                                                                                    else:
-                                                                                                                                                            print("** no instance found **")
-else:
-                    print("** instance id missing **")
-else:
-                print("** class doesn't exist **")
+                if key in models.storage.all():
+                    del models.storage.all()[key]
+                    """del(key) removes the key from the dictionary"""
+                    models.storage.save()
+                    """save() saves the changes in the JSON file"""
+                else:
+                    print("** no instance found **")
+            else:
+                print("** instance id missing **")
+        else:
+            print("** class doesn't exist **")
 
-                    def do_all(self, args):
-                                """Prints all string representation of all instances
+    def do_all(self, args):
+        """Prints all string representation of all instances
         based or not on the class name."""
 
-                                        new_object = models.storage.all()
-                                                """new_object is a dictionary with all the objects"""
-                                                        list_objects = []
-                                                                """list_objects is a list with all the objects"""
-                                                                        if args not in my_classes:
-                                                                                        """if args is not empty and args is not in my_classes,
+        new_object = models.storage.all()
+        """new_object is a dictionary with all the objects"""
+        list_objects = []
+        """list_objects is a list with all the objects"""
+        if args not in my_classes:
+            """if args is not empty and args is not in my_classes,
             then the class doesn't exist"""
-                                                                                                    print("** class doesn't exist **")
-                                                                                                                return
-                                                                                                                    if args in self.classes:
-                                                                                                                                    for key, value in new_object.items():
-                                                                                                                                                        """for key, value in new_object.items()
+            print("** class doesn't exist **")
+            return
+        if args in self.classes:
+            for key, value in new_object.items():
+                """for key, value in new_object.items()
                     key is the key of the dictionary
                     value is the value of the dictionary, new_object.items is a
                     generator that returns the key-value of the dictionary"""
-                                                                                                                                                                        if args in key:
-                                                                                                                                                                                                """if args is in key, then the class exists"""
-                                                                                                                                                                                                                    toke_key = key.split(".")
-                                                                                                                                                                                                                                        """toke_key is a list with the class name and the id"""
-                                                                                                                                                                                                                                                            key_new = "[" + toke_key[0] + "]"\
-                                                                                                                                                                                                                                                                                        + " (" + toke_key[1] + ")"
-                                                                                                                                                                                                                                                                                list_objects.append(key_new + " " + str(value))
-                                                                                                                                                                                                                                                                                                    """list_objects.append(key_new + " " + str(value))
+                if args in key:
+                    """if args is in key, then the class exists"""
+                    toke_key = key.split(".")
+                    """toke_key is a list with the class name and the id"""
+                    key_new = "[" + toke_key[0] + "]"\
+                        + " (" + toke_key[1] + ")"
+                    list_objects.append(key_new + " " + str(value))
+                    """list_objects.append(key_new + " " + str(value))
                         list_objects is a list with the objects in format
                         [class name] (id) object"""
-                                                                                                                                                                                                                                                                                                                        print(list_object)s
+                    print(list_objects)
