@@ -1,55 +1,74 @@
-#!/usr/bin/env python3
-""" BaseModel that defines all common attributes/methods for other classes """
-from uuid import uuid4
+#!/usr/bin/python3
+'''This module contains a base class called 'BaseModel'that defines all common
+attributes/methods for other classes.
+'''
+import uuid
 from datetime import datetime
-import models
+from models import storage
 
 
 class BaseModel:
-    """Base class for all models"""
+    """Public instance attributes:
+        id (str):  assign with an uuid when an instance is created.
+        created_at: current datetime when an instance is created
+        updated_at: current datetime when an instance is created and it will
+        be updated every time the object changes.
+    """
 
-    def __init__(self):
-        """ instantiates a new object
-            Args:
-                *args: variable length argument list not used
-                **kwargs: (key - value) pair of attributes
-            """
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+    def __init__(self, *args, **kwargs):
+        """ constructor validate kwargs """
+        if len(kwargs) == 0:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            storage.new(self)
+
         if len(kwargs) > 0:
             for key, value in kwargs.items():
-                if key == 'created_at':
-                    self.created_at = datetime.strptime(value,
-                                                        '%Y-%m-%dT%H:%M:%S.%f')
-                elif key == 'updated_at':
-                    self.updated_at = datetime.strptime(value,
-                                                        '%Y-%m-%dT%H:%M:%S.%f')
-                else:
-                    if key != "__class__":
-                        setattr(self, key, value)
-        else:
-            models.storage.new(self)
+                if key == '__class__':
+                    continue
+                setattr(self, key, value)
+
+            self.created_at = datetime.strptime(
+                self.created_at, '%Y-%m-%dT%H:%M:%S.%f')
+            self.updated_at = datetime.strptime(
+                self.updated_at, '%Y-%m-%dT%H:%M:%S.%f')
 
     def __str__(self):
-        """ Returns a string representation of the object """
-        return "[{}] ({}) {}".format(
-                self.__class__.__name__,
-                self.id,
-                self.__dict__)
+        """Overriding the __str__ method
+        Returns:
+            Information with this format:
+            [<class name>] (<self.id>) <self.__dict__>
+        """
+        my_dict = self.__dict__
+
+        my_dict['updated_at'] = self.updated_at
+        my_dict['created_at'] = self.created_at
+
+        to_print = '[{}] ({}) {}'.format(self.__class__.__name__, self.id,
+                                         my_dict)
+        return to_print
 
     def save(self):
-        """ updates the public instance attribute
-        updated_at with current time"""
+        """updates the public instance attribute updated_at with the
+        current datetime"""
         self.updated_at = datetime.now()
-        models.storage.save()
+        storage.save()
 
     def to_dict(self):
-        """ Returns a dictionary containing all keys/values of __dict__
-        of the instance
         """
-        new_dict = dict(self.__dict__)
-        new_dict["created_at"] = self.created_at.isoformat(sep='T')
-        new_dict["updated_at"] = self.updated_at.isoformat(sep='T')
-        new_dict["__class__"] = self.__class__.__name__
-        return new_dict
+        Returns:
+            -A dictionary containing keys/values of __dict__ of the instance
+            -A 'key __class__'  with the class name of the object.
+            -'created_at' and 'updated_at' in isoformat()
+        """
+        my_dict = self.__dict__.copy()
+        my_dict['__class__'] = self.__class__.__name__
+
+        if type(self.updated_at) is datetime:
+            my_dict['updated_at'] = self.updated_at.isoformat()
+
+        if type(self.created_at) is datetime:
+            my_dict['created_at'] = self.created_at.isoformat()
+
+        return my_dict
