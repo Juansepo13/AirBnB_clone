@@ -1,3 +1,31 @@
+
+Skip to content
+Pulls
+Issues
+Marketplace
+Explore
+@elkinguerrero007
+williamzborja /
+AirBnB_clone
+Public
+
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+
+    Insights
+
+AirBnB_clone/models/base_model.py /
+@williamzborja
+williamzborja add test_save to base model and add documentation of file_storage
+Latest commit be3a91d on 29 Jun 2021
+History
+1 contributor
+executable file 74 lines (61 sloc) 2.41 KB
 #!/usr/bin/python3
 '''This module contains a base class called 'BaseModel'that defines all common
 attributes/methods for other classes.
